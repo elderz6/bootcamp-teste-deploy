@@ -8,16 +8,16 @@ on:
 
 jobs:
   build:
-  runs-on: self-hosted
-
-  steps:
-  - name: Pull Docker image
-    run: sudo docker pull elderz6/petsalvo-frontend:latest
+    runs-on: self-hosted
   
-  - name: Delete Old Docker Container
-    run: sudo docker rm -f petsalvo-frontend-container || true
-
-  - name: Run Docker Container
-    run: sudo docker run -d -p 8080:8080 --name petsalvo-frontend-container elderz6/petsalvo-frontend
-
+    steps:
+    - name: Pull Docker image
+      run: sudo docker pull elderz6/petsalvo-frontend:latest
+    
+    - name: Delete Old Docker Container
+      run: sudo docker rm -f petsalvo-frontend-container || true
+  
+    - name: Run Docker Container
+      run: sudo docker run -d -p 8080:8080 --name petsalvo-frontend-container elderz6/petsalvo-frontend
+  
 
