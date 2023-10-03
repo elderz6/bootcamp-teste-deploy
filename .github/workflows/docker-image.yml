@@ -22,5 +22,7 @@ jobs:
       
     - name: Build the Docker image
       run: docker build -t petsalvo-frontend .
+    - name: tag
+      run: docker tag petsalvo-frontend elderz6/petsalvo-frontend
     - name: push to dockerhub
       run: docker push elderz6/petsalvo-frontend:latest
