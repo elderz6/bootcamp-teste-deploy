@@ -1,10 +1,10 @@
 name: CD Pipeline
 
 on:
-  workflow_rn:
-  workflows: ["CI Pipeline"]
-  types:
-    -completed
+  workflow_run:
+    workflows: ["CI Pipeline"]
+    types:
+      -completed
 
 jobs:
   build:
