@@ -11,6 +11,9 @@ jobs:
     runs-on: self-hosted
   
     steps:
+    - name: Clear Docker images
+      run: sudo docker rm *
+      
     - name: Pull Docker image
       run: sudo docker pull elderz6/petsalvo-frontend:latest
     
