@@ -8,4 +8,6 @@ COPY package.json /petsalvo-frontend/
 
 RUN npm install
 
+RUN npm run build
+
 CMD ["npm", "start"]
