@@ -11,6 +11,7 @@ export default function Navbar() {
     const toggleMenu = () => {
         toggleOpen(open => !open)
     }
+     {/*Teste de exibição de elementos extras em caso de usuario logado*/}
 
     {/*Teste de exibição de elementos extras em caso de usuario logado*/}
     const toggleLogadoTeste = () => {
