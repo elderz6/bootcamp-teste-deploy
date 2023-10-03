@@ -14,8 +14,8 @@ RUN npm run build
 RUN npm prune --production
 
 # copy from build image
-COPY --from=BUILD_IMAGE /app/package.json ./package.json
-COPY --from=BUILD_IMAGE /app/node_modules ./node_modules
-COPY --from=BUILD_IMAGE /app/.next ./.next
-COPY --from=BUILD_IMAGE /app/public ./public
+COPY /app/package.json ./package.json
+COPY /app/node_modules ./node_modules
+COPY /app/.next ./.next
+COPY /app/public ./public
 CMD ["npm", "start"]
