@@ -2,26 +2,24 @@ name: CD Pipeline
 
 on:
   workflow_run:
-    workflows: ["CI Pipeline"]
-    types:
-      - completed
+    workflows: [CI Pipeline]
+    types: [completed]
 
 jobs:
-  build:
+  on-success:
     runs-on: self-hosted
-  
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
-
-    - name: Delete Old Docker Container
-      run: sudo docker rm -f petsalvo-frontend-container || true
-
-    - name: Prune old images
-      run: sudo docker image prune -a -f
-      
-    - name: Pull Docker image
-      run: sudo docker pull elderz6/petsalvo-frontend:latest
-
-    - name: Run Docker Container
-      run: sudo docker run -it -d -p 0.0.0.0:8080:3000 --name petsalvo-frontend-container elderz6/petsalvo-frontend
+      - name: Delete Old Docker Container
+        run: sudo docker rm -f petsalvo-frontend-container || true
+  
+      - name: Prune old images
+        run: sudo docker image prune -a -f
+        
+      - name: Pull Docker image
+        run: sudo docker pull elderz6/petsalvo-frontend:latest
+  
+      - name: Run Docker Container
+        run: sudo docker run -it -d -p 0.0.0.0:8080:3000 --name petsalvo-frontend-container elderz6/petsalvo-frontend
   
 
