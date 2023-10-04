@@ -16,7 +16,7 @@ jobs:
       run: sudo docker rm -f petsalvo-frontend-container || true
 
     - name: Prune old images
-      run: sudo docker image prune -a
+      run: sudo docker image prune -a -f
       
     - name: Pull Docker image
       run: sudo docker pull elderz6/petsalvo-frontend:latest
