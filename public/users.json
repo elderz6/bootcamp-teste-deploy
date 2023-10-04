@@ -1,0 +1,12 @@
+[
+  {
+    "email": "ong@petsalvo.com",
+    "password": "123",
+    "userType": "ong"
+  },
+  {
+    "email": "adotante@petsalvo.com",
+    "password": "123",
+    "userType": "adotante"
+  }
+]

@@ -1,0 +1,32 @@
+# Exemplo de pipeline usando gihub actions
+# build de imagem docker e upload no dockerhub
+# alternativa seria alterar o script para clonar o repo na maquina e rodar esse script de build
+
+name: CI Pipeline
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Login dockerhub
+      env:
+        DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
+        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+      run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+      
+    - name: Build the Docker image
+      run: docker build -t petsalvo-frontend .
+    - name: tag
+      run: docker tag petsalvo-frontend elderz6/petsalvo-frontend
+    - name: push to dockerhub
+      run: docker push elderz6/petsalvo-frontend:latest

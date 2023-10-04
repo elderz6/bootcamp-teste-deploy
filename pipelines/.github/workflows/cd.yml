@@ -1,0 +1,36 @@
+# Exemplo de pipeline de deploy usando gihub actions
+# pipeline usa o runner do github na maquina ec2
+# Configurar runner: pagina do repositorio > settings > Actions > runners
+# o runner roda os passos como um script
+
+name: CD Pipeline
+
+on:
+  workflow_run:
+    workflows: ["CI Pipeline"]
+    types:
+      - completed
+
+jobs:
+  build:
+    runs-on: self-hosted
+  
+    steps:
+
+    #remove o container rodando
+    - name: Delete Old Docker Container
+      run: sudo docker rm -f petsalvo-frontend-container || true
+
+    #deleta imagens antigas(importante pq o ec2 tem espaço muito limitado e cada imagem chega a mais de 1gb)
+    - name: Prune old images
+      run: sudo docker image prune -a -f
+    
+    #baixa imagem do dockerhub (opcional se alterar para buildar localmente)
+    - name: Pull Docker image
+      run: sudo docker pull elderz6/petsalvo-frontend:latest
+
+    #sobe o container (pode ser substituido por um docker-compose)
+    - name: Run Docker Container
+      run: sudo docker run -it -d -p 0.0.0.0:8080:3000 --name petsalvo-frontend-container elderz6/petsalvo-frontend
+  
+
