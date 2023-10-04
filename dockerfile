@@ -13,6 +13,6 @@ RUN npm run build
 # remove dev dependencies
 RUN npm prune --production
 
-COPY ./.next ./_next
+COPY .next ./_next
 
 CMD ["npm", "start"]
